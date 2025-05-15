@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools</title>
+    <style>
+        @font-face {
+            font-family: 'LandingFont';
+            src: url('fonts/landing.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Skulgly';
+            src: url('fonts/skulgly.ttf') format('truetype');
+        }
+        body {
+            font-family: 'LandingFont', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #a85cff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .content {
+            z-index: 1;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-family: 'Skulgly', Arial, sans-serif;
+            font-size: 4rem;
+            color: #a85cff;
+            margin-top: 50px;
+        }
+        .button {
+            font-family: 'LandingFont', Arial, sans-serif;
+            margin: 10px;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #a85cff, #6f32b6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 4px 10px rgba(168, 92, 255, 0.5);
+        }
+        .button:hover {
+            background: linear-gradient(45deg, #c65cff, #8a46cc);
+            transform: scale(1.05);
+            box-shadow: 0px 8px 15px rgba(168, 92, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="content">
+        <h1>Tools</h1>
+        <a href="/tools/dataurl" class="button">Data URL from HTML</a>
+        <a href="/tools/htmlcompiler" class="button">HTML File Compiler</a>
+        <a href="/tools/htmltocode" class="button">HTML File to HTML Code</a>
+        <a href="/tools/htmltofile" class="button">HTML to HTML File</a>
+        <a href="/tools/jscompiler" class="button">JavaScript Compiler</a>
+        <a href="/tools/harxss" class="button">.har XSS Generator</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 200, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#a85cff" },
+                "shape": { "type": "edge", "polygon": { "nb_sides": 4 } },
+                "opacity": { "value": 1, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 } },
+                "size": { "value": 6, "random": true },
+                "move": { "enable": true, "speed": 2, "direction": "bottom", "random": true, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    }
+                },
+                "modes": {
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.6
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
