@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Compiler</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 100px; }
+        button { margin: 10px 0; padding: 10px; }
+        #output { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>JavaScript Compiler in HTML</h2>
+    <textarea id="jsCode" placeholder="Write JavaScript code here..."></textarea>
+    <button onclick="runCode()">Run Code</button>
+    <div id="output"></div>
+
+    <script>
+        function runCode() {
+            let code = document.getElementById("jsCode").value;
+            try {
+                let result = eval(code);
+                document.getElementById("output").innerText = "Output: " + result;
+            } catch (error) {
+                document.getElementById("output").innerText = "Error: " + error;
+            }
+        }
+    </script>
+
+</body>
+</html>
