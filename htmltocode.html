@@ -1,0 +1,48 @@
+data:text/html;charset=utf-8,<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML File Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/monokai.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c36;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            margin: 20px;
+        }
+        pre {
+            text-align: left;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #1e1e1e;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Code Viewer</h1>
+    <input type="file" id="fileInput" accept=".html">
+    <pre><code id="codeDisplay" class="html"></code></pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('codeDisplay').textContent = e.target.result;
+                    hljs.highlightElement(document.getElementById('codeDisplay'));
+                };
+                reader.readAsText(file);
+            }
+        });
+    </script>
+</body>
+</html>
