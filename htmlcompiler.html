@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Compiler</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+    h1 { text-align: center; }
+    .container { display: flex; flex-direction: column; align-items: center; }
+    textarea { width: 80%; height: 200px; padding: 10px; font-family: monospace; }
+    iframe { width: 80%; height: 300px; border: 1px solid #ccc; margin-top: 10px; background: #fff; }
+    button { padding: 10px 20px; margin-top: 10px; cursor: pointer; border: none; background: #007BFF; color: white; font-size: 16px; }
+    button:hover { background: #0056b3; }
+</style>
+</head>
+<body>
+
+<h1>HTML Compiler</h1>
+<div class="container">
+    <textarea id="htmlCode" placeholder="Enter your HTML code here..."></textarea>
+    <button onclick="compileCode()">Run Code</button>
+    <iframe id="outputFrame"></iframe>
+</div>
+
+<script>
+function compileCode() {
+    var htmlCode = document.getElementById("htmlCode").value;
+    var iframe = document.getElementById("outputFrame").contentWindow.document;
+    iframe.open();
+    iframe.write(htmlCode);
+    iframe.close();
+}
+</script>
+
+</body>
+</html>
